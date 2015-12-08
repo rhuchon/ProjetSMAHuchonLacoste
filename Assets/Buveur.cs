@@ -5,6 +5,7 @@ public class Buveur : Personne {
 
 	// Use this for initialization
 	void Start () {
+        etatCourant = "buveur";
         probaBoire = 0.65;
         probaDanser = 0.1;
         probaParler = 0.0;

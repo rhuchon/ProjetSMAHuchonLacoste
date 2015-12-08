@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class Game : MonoBehaviour {
-    
-    public int[] EtatsPopulation; //On stoque le nombre de personne dans le même état, une case par état
+
+    public int nbPersonnes;
+    public string[] etatsPopulation; //On stoque le nombre de personne dans le même état, une case par état
     public System.DateTime dateSysteme;
     public System.DateTime ancienneDateMAJ;
     public int dureeEtat; // Temps en seconde d'un etat
@@ -12,7 +13,7 @@ public class Game : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         ancienneDateMAJ = System.DateTime.Now;
-
+        Personne p1 = new Buveur();
 	}
 	
 	// Update is called once per frame

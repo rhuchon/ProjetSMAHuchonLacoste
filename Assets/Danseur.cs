@@ -5,6 +5,7 @@ public class Danseur : Personne {
 
 	// Use this for initialization
 	void Start () {
+        etatCourant = "danseur";        
         probaBoire = 0.1;
         probaDanser = 0.7;
         probaParler = 0.1;

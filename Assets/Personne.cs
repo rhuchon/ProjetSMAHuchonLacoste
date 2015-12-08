@@ -2,22 +2,19 @@
 using System.Collections;
 
 public class Personne : MonoBehaviour {
+    public Game gameActuel;
     public double probaBoire;
     public double probaDanser;
     public double probaParler;    
     public double probaTable;
     public double probaToilette;
-    public int etatCourant;
-    public int couleurPersonne;
+    public string etatCourant;
+    public string personnaliteDominante;
     public double variationEnvieBoire;
     public double variationEnvieDanser;
     public double variationEnvieParler;
     public double variationEnvieTable;
-    public double variationEnvieToilette;
-
-    // a mettre dans les méthode
-    public Random aleaEtatsPopulation = new Random(); // varie de 0 à nombre de personnes    
-    public bool choixDecisionPersonnelle; // true = fonction de l'envie personnelle, false = en fonction de l'etat de la population
+    public double variationEnvieToilette;   
 
 	// Use this for initialization
 	void Start () {
@@ -31,33 +28,57 @@ public class Personne : MonoBehaviour {
 
     public void actionPersonnage()
     {
-        // ici faire action en fonction de la population
+        bool choixDecisionPerso = (Random.value < 0.5) ? true : false; // true = fonction de l'envie personnelle, false = en fonction de l'etat de la population
 
-        // if (choixDecisionPerso) {
-        double aleaActionPerso = Random.value; // Varie selon sa probabilité d'action allant de 0 à 1
-        if (aleaActionPerso <= probaBoire) // Boire
+        // Choix de l'action personnelle en fonction de sa personnalité propre et dynamique
+        if (choixDecisionPerso)
         {
-            // Fonction Boire ( Aller au bar) + Fonction Couleur
-            VariationEnvieBoire(variationEnvieBoire);
+            double aleaActionPerso = Random.value; // Varie selon sa probabilité d'action allant de 0 à 1
+            if (aleaActionPerso <= probaBoire) // Boire
+            {
+                // Fonction Boire ( Aller au bar) +  MAJ Etat courant + MAJ personnaliteDomiante si il y a lieu + Fonction Couleur si modif personnaliteDominante
+                VariationEnvieBoire(variationEnvieBoire);
+            }
+            else if (aleaActionPerso <= probaBoire + probaDanser) // Danser
+            {
+                // Fonction Danser
+                VariationEnvieDanser(variationEnvieDanser);
+            }
+            else if (aleaActionPerso <= probaBoire + probaDanser + probaParler) // Parler
+            {
+                // Fonction parler
+                VariationEnvieParler(variationEnvieParler);
+            }
+            else if (aleaActionPerso <= probaBoire + probaDanser + probaParler + probaTable) // Table
+            {
+                // Fonction Table
+                VariationEnvieTable(variationEnvieTable);
+            }
+            else // Toilette
+            {
+                VariationEnvieToilette(variationEnvieToilette);
+            }
+
+            VariationPersonnalite(); // MAJ de la couleur du personnage si sa personnalité a changé
         }
-        else if (aleaActionPerso <= probaBoire + probaDanser) // Danser
+        // Choix de l'action en fonction des etats courants de la population
+        else
         {
-            // Fonction Danser
-            VariationEnvieDanser(variationEnvieDanser);
-        }
-        else if (aleaActionPerso <= probaBoire + probaDanser + probaParler) // Parler
-        {
-            // Fonction parler
-            VariationEnvieParler(variationEnvieParler);
-        }
-        else if (aleaActionPerso <= probaBoire + probaDanser + probaParler + probaTable) // Table
-        {
-            // Fonction Table
-            VariationEnvieTable(variationEnvieTable);
-        }
-        else // Toilette
-        {
-            VariationEnvieToilette(variationEnvieToilette);
+            System.Random rnd = new System.Random();
+
+            int aleaEtatsPopulation = rnd.Next(0, gameActuel.nbPersonnes);
+            if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "buveur")
+            {
+                VariationEnvieBoire(variationEnvieBoire);
+            }
+            else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "danseur")
+            {
+                VariationEnvieDanser(variationEnvieDanser);
+            }
+            else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "dragueur")
+            {
+                VariationEnvieToilette(variationEnvieToilette);
+            }
         }
     }
 
@@ -158,4 +179,21 @@ public class Personne : MonoBehaviour {
         probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
     }
 
+    public void VariationPersonnalite()
+    {
+        if (probaBoire >= 0.5)
+        {
+            personnaliteDominante = "buveur";
+        }
+        else if (probaDanser >= 0.5)
+        {
+            personnaliteDominante = "danseur";
+            
+        }
+        else if ((probaParler + probaTable) >= 0.5)
+        {
+            personnaliteDominante = "dragueur";
+
+        }
+    }
 }
