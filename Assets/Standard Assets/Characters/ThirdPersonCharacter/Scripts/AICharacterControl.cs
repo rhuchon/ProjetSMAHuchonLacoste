@@ -10,7 +10,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public NavMeshAgent agent { get; private set; } // the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target1; // target to aim for
-        public Transform target2; // target to aim for
 
 
         // Use this for initialization
@@ -49,10 +48,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void SetTarget1(Transform target1)
         {
             this.target1 = target1;
-        }
-        public void SetTarget2(Transform target2)
-        { 
-            this.target2 = target2;
         }
     }
 }
