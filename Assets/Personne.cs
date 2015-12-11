@@ -1,199 +1,227 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Personne : MonoBehaviour {
-    public Game gameActuel;
-    public double probaBoire;
-    public double probaDanser;
-    public double probaParler;    
-    public double probaTable;
-    public double probaToilette;
-    public string etatCourant;
-    public string personnaliteDominante;
-    public double variationEnvieBoire;
-    public double variationEnvieDanser;
-    public double variationEnvieParler;
-    public double variationEnvieTable;
-    public double variationEnvieToilette;   
-
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void actionPersonnage()
+namespace UnityStandardAssets.Characters.ThirdPerson
+{
+    public class Personne
     {
-        bool choixDecisionPerso = (Random.value < 0.5) ? true : false; // true = fonction de l'envie personnelle, false = en fonction de l'etat de la population
+        public Game gameActuel;
+        public double probaBoire;
+        public double probaDanser;
+        public double probaParler;
+        public double probaTable;
+        public double probaToilette;
+        public string etatCourant;
+        public string personnaliteDominante;
+        public double variationEnvieBoire;
+        public double variationEnvieDanser;
+        public double variationEnvieParler;
+        public double variationEnvieTable;
+        public double variationEnvieToilette;
+        public Deplacement comportement;
 
-        // Choix de l'action personnelle en fonction de sa personnalité propre et dynamique
-        if (choixDecisionPerso)
+        public Personne()
         {
-            double aleaActionPerso = Random.value; // Varie selon sa probabilité d'action allant de 0 à 1
-            if (aleaActionPerso <= probaBoire) // Boire
+           
+        }
+
+        public void actionPersonnage()
+        {
+            bool choixDecisionPerso = (Random.value < 0.5) ? true : false; // true = fonction de l'envie personnelle, false = en fonction de l'etat de la population
+
+            // Choix de l'action personnelle en fonction de sa personnalité propre et dynamique
+            if (choixDecisionPerso)
             {
-                // Fonction Boire ( Aller au bar) +  MAJ Etat courant + MAJ personnaliteDomiante si il y a lieu + Fonction Couleur si modif personnaliteDominante
-                VariationEnvieBoire(variationEnvieBoire);
+                double aleaActionPerso = Random.value; // Varie selon sa probabilité d'action allant de 0 à 1
+                if (aleaActionPerso <= probaBoire) // Boire
+                {
+                    Boire();
+
+                }
+                else if (aleaActionPerso <= probaBoire + probaDanser) // Danser
+                {
+                    // Fonction Danser
+                    Danser();
+                }
+                else if (aleaActionPerso <= probaBoire + probaDanser + probaParler) // Parler
+                {
+                    // Fonction parler
+                    Parler();
+                }
+                else if (aleaActionPerso <= probaBoire + probaDanser + probaParler + probaTable) // Table
+                {
+                    // Fonction Table
+                    Table();
+                }
+                else // Toilette
+                {
+                    Toilette();
+                }
+
+                VariationPersonnaliteDominante();
             }
-            else if (aleaActionPerso <= probaBoire + probaDanser) // Danser
+            // Choix de l'action en fonction des etats courants de la population
+            else
             {
-                // Fonction Danser
-                VariationEnvieDanser(variationEnvieDanser);
+                System.Random rnd = new System.Random();
+
+                int aleaEtatsPopulation = rnd.Next(0, gameActuel.nbPersonnes);
+                if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "buveur")
+                {
+                    Boire();
+                }
+                else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "danseur")
+                {
+                    Danser();
+                }
+                else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "dragueur")
+                {
+
+                    Table();
+                }
             }
-            else if (aleaActionPerso <= probaBoire + probaDanser + probaParler) // Parler
+        }
+
+        public void VariationEnvieBoire(double variationEnvieBoire)
+        {
+            bool augmentationEnvie = (Random.value < 0.5) ? true : false; // détermine si l'envie augmente si true ou diminue si false
+            if (augmentationEnvie)
             {
-                // Fonction parler
-                VariationEnvieParler(variationEnvieParler);
+                probaBoire += variationEnvieBoire;
+                probaDanser -= variationEnvieBoire * 2 / 3;
+                probaParler -= variationEnvieBoire * 2 / 3;
+                probaTable -= variationEnvieBoire * 2 / 3;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+
             }
-            else if (aleaActionPerso <= probaBoire + probaDanser + probaParler + probaTable) // Table
+            else
             {
-                // Fonction Table
-                VariationEnvieTable(variationEnvieTable);
+                probaBoire -= variationEnvieBoire;
+                probaDanser += variationEnvieBoire / 4;
+                probaParler += variationEnvieBoire / 4;
+                probaTable += variationEnvieBoire / 4;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
             }
-            else // Toilette
+        }
+
+        public void VariationEnvieDanser(double variationEnvieDanser)
+        {
+            bool augmentationEnvie = (Random.value < 0.5) ? true : false;
+            if (augmentationEnvie)
             {
-                VariationEnvieToilette(variationEnvieToilette);
+                probaBoire -= variationEnvieDanser / 4;
+                probaDanser += variationEnvieDanser;
+                probaParler -= variationEnvieDanser / 4;
+                probaTable -= variationEnvieDanser / 4;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+
             }
-
-            VariationPersonnalite(); // MAJ de la couleur du personnage si sa personnalité a changé
-        }
-        // Choix de l'action en fonction des etats courants de la population
-        else
-        {
-            System.Random rnd = new System.Random();
-
-            int aleaEtatsPopulation = rnd.Next(0, gameActuel.nbPersonnes);
-            if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "buveur")
+            else
             {
-                VariationEnvieBoire(variationEnvieBoire);
+                probaBoire += variationEnvieDanser / 4;
+                probaDanser -= variationEnvieDanser;
+                probaParler += variationEnvieDanser / 4;
+                probaTable += variationEnvieDanser / 4;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
             }
-            else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "danseur")
+        }
+
+        public void VariationEnvieParler(double variationEnvieParler)
+        {
+            bool augmentationEnvie = (Random.value < 0.5) ? true : false;
+            if (augmentationEnvie)
             {
-                VariationEnvieDanser(variationEnvieDanser);
+                probaBoire -= variationEnvieParler / 4;
+                probaDanser -= variationEnvieParler / 4;
+                probaParler += variationEnvieParler;
+                probaTable -= variationEnvieParler / 4;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+
             }
-            else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "dragueur")
+            else
             {
-                VariationEnvieToilette(variationEnvieToilette);
+                probaBoire += variationEnvieParler / 4;
+                probaDanser += variationEnvieParler / 4;
+                probaParler -= variationEnvieParler;
+                probaTable += variationEnvieParler / 4;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
             }
         }
-    }
 
-    public void VariationEnvieBoire(double variationEnvieBoire)
-    {
-        bool augmentationEnvie = (Random.value < 0.5) ? true : false; // détermine si l'envie augmente si true ou diminue si false
-        if (augmentationEnvie)
+        public void VariationEnvieTable(double variationEnvieTable)
         {
-            probaBoire += variationEnvieBoire;
-            probaDanser -= variationEnvieBoire * 2 / 3;
-            probaParler -= variationEnvieBoire * 2 / 3;
-            probaTable -= variationEnvieBoire * 2 / 3;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+            bool augmentationEnvie = (Random.value < 0.5) ? true : false;
+            if (augmentationEnvie)
+            {
+                probaBoire -= variationEnvieTable / 4;
+                probaDanser -= variationEnvieTable / 4;
+                probaParler -= variationEnvieTable / 4;
+                probaTable += variationEnvieTable;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
 
+            }
+            else
+            {
+                probaBoire += variationEnvieTable / 4;
+                probaDanser += variationEnvieTable / 4;
+                probaParler += variationEnvieTable / 4;
+                probaTable -= variationEnvieTable;
+                probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+            }
         }
-        else
-        {
-            probaBoire -= variationEnvieBoire;
-            probaDanser += variationEnvieBoire / 4;
-            probaParler += variationEnvieBoire / 4;
-            probaTable += variationEnvieBoire / 4;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-        }
-    }
 
-    public void VariationEnvieDanser(double variationEnvieDanser)
-    {
-        bool augmentationEnvie = (Random.value < 0.5) ? true : false;
-        if (augmentationEnvie)
+        public void VariationEnvieToilette(double variationEnvieToilette)
         {
-            probaBoire -= variationEnvieDanser / 4;
-            probaDanser += variationEnvieDanser;
-            probaParler -= variationEnvieDanser / 4;
-            probaTable -= variationEnvieDanser / 4;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-
-        }
-        else
-        {
-            probaBoire += variationEnvieDanser / 4;
-            probaDanser -= variationEnvieDanser;
-            probaParler += variationEnvieDanser / 4;
-            probaTable += variationEnvieDanser / 4;
+            probaBoire += variationEnvieToilette / 4;
+            probaDanser += variationEnvieToilette / 4;
+            probaParler += variationEnvieToilette / 4;
+            probaTable += variationEnvieToilette / 4;
             probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
         }
-    }
 
-    public void VariationEnvieParler(double variationEnvieParler)
-    {
-        bool augmentationEnvie = (Random.value < 0.5) ? true : false;
-        if (augmentationEnvie)
+        public void VariationPersonnaliteDominante()
         {
-            probaBoire -= variationEnvieParler / 4;
-            probaDanser -= variationEnvieParler / 4;
-            probaParler += variationEnvieParler;
-            probaTable -= variationEnvieParler / 4;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
+            if (probaBoire >= 0.5)
+            {
+                personnaliteDominante = "buveur";
+            }
+            else if (probaDanser >= 0.5)
+            {
+                personnaliteDominante = "danseur";
 
+            }
+            else if ((probaParler + probaTable) >= 0.5)
+            {
+                personnaliteDominante = "dragueur";
+
+            }
         }
-        else
-        {
-            probaBoire += variationEnvieParler / 4;
-            probaDanser += variationEnvieParler / 4;
-            probaParler -= variationEnvieParler;
-            probaTable += variationEnvieParler / 4;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-        }
-    }
 
-    public void VariationEnvieTable(double variationEnvieTable)
-    {
-        bool augmentationEnvie = (Random.value < 0.5) ? true : false;
-        if (augmentationEnvie)
+        public void Boire()
         {
-            probaBoire -= variationEnvieTable  / 4;
-            probaDanser -= variationEnvieTable / 4;
-            probaParler -= variationEnvieTable / 4;
-            probaTable += variationEnvieTable;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-
+            etatCourant = "boire";
+            VariationEnvieBoire(variationEnvieBoire);
         }
-        else
-        {
-            probaBoire += variationEnvieTable / 4;
-            probaDanser += variationEnvieTable / 4;
-            probaParler += variationEnvieTable / 4;
-            probaTable -= variationEnvieTable;
-            probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-        }
-    }
 
-    public void VariationEnvieToilette(double variationEnvieToilette)
-    {
-        probaBoire += variationEnvieToilette / 4;
-        probaDanser += variationEnvieToilette / 4;
-        probaParler += variationEnvieToilette / 4;
-        probaTable += variationEnvieToilette / 4;
-        probaToilette = 1 - probaBoire - probaDanser - probaParler - probaTable;
-    }
-
-    public void VariationPersonnalite()
-    {
-        if (probaBoire >= 0.5)
+        public void Danser()
         {
-            personnaliteDominante = "buveur";
+            etatCourant = "danser";
+            VariationEnvieDanser(variationEnvieDanser);
         }
-        else if (probaDanser >= 0.5)
+        public void Parler()
         {
-            personnaliteDominante = "danseur";
-            
+            etatCourant = "parler";
+            VariationEnvieParler(variationEnvieParler);
         }
-        else if ((probaParler + probaTable) >= 0.5)
+        public void Table()
         {
-            personnaliteDominante = "dragueur";
-
+            etatCourant = "goTable";
+            VariationEnvieTable(variationEnvieTable);
+        }
+        public void Toilette()
+        {
+            etatCourant = "goToilette";
+            VariationEnvieToilette(variationEnvieToilette);
         }
     }
 }
