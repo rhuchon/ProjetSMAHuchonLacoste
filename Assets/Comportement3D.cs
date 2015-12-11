@@ -6,18 +6,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(ThirdPersonCharacter))]
 
-    public class Deplacement : MonoBehaviour
+    public class Comportement3D : MonoBehaviour
     {
 
 
         public NavMeshAgent agent { get; private set; }
         public ThirdPersonCharacter character { get; private set; }
-        public SkinnedMeshRenderer body;
+        public MeshRenderer body { get; private set; }
+        //public GameObject body;
         private double remainingDist;
         //public string testcouleur;
         //public string testactionperso;
         private Game game;
-        private Personne personnalite;
+        public Personnalite personnalite;
         Transform emplacementbar;
         Transform emplacementmirror;
         Transform emplacementpiste;
@@ -28,16 +29,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         void Start()
         {
             
-            for (int i = 0; i < game.nbPersonnes; i++)
-            {
-                Debug.Log(game.nbPersonnes);
-                Deplacement personnalisation = Instantiate(this);
-                personnalisation.personnalite = game.personnes[i];
-            }
 
             agent = GetComponent<NavMeshAgent>();
-            character = GetComponent<ThirdPersonCharacter>();
-            body = GetComponent<SkinnedMeshRenderer>();
+            character = GetComponent<ThirdPersonCharacter>();                                  
+            body = GetComponent<MeshRenderer>();
 
             GameObject bar = GameObject.Find("Bar");
             emplacementbar = bar.transform;
@@ -60,18 +55,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            body = character.GetComponentInChildren<SkinnedMeshRenderer>();
+            
+            //GameObject body = GameObject.Find("LesGens");
 
             switch (personnalite.personnaliteDominante)
             {
+                    
                 case "buveur":
-                    body.material.color = Color.blue;
+                    //body.GetComponent<MeshRenderer>().material.color = Color.blue;
+                    body.material.color = Color.blue;                    
                     break;
                 case "danseur":
-                    body.material.color = Color.red;
+                    //body.GetComponent<MeshRenderer>().material.color = Color.red;
+                    body.material.color = Color.blue;
                     break;
                 case "dragueur":
-                    body.material.color = Color.green;
+                    body.material.color = Color.blue;
+                    //body.GetComponent<MeshRenderer>().material.color = Color.green;
+                    break;
+                case "neutre":
+                    //body.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                    body.material.color = Color.blue;
                     break;
 
             }

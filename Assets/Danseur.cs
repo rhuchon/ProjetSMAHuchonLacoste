@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    public class Danseur : Personne
+    public class Danseur : Personnalite
     {
 
         // Use this for initialization
@@ -20,6 +20,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             variationEnvieParler = 0.02;
             variationEnvieTable = 0.02;
             variationEnvieToilette = 0.02;
+            VariationPersonnaliteDominante();
         }
     }
 }

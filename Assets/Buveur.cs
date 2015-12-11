@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    public class Buveur : Personne
+    public class Buveur : Personnalite
     {
         public Buveur()
         {
@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             variationEnvieParler = 0.02;
             variationEnvieTable = 0.02;
             variationEnvieToilette = 0.02;
+            VariationPersonnaliteDominante();
         }
     }
 }

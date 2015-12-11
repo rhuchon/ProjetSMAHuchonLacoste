@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    public class Personne
+    public class Personnalite
     {
         public Game gameActuel;
         public double probaBoire;
@@ -18,11 +18,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public double variationEnvieParler;
         public double variationEnvieTable;
         public double variationEnvieToilette;
-        public Deplacement comportement;
+        public Comportement3D comportement;
 
-        public Personne()
+        public Personnalite()
         {
-           
+            //VariationPersonnaliteDominante();
         }
 
         public void actionPersonnage()
@@ -61,7 +61,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 VariationPersonnaliteDominante();
             }
             // Choix de l'action en fonction des etats courants de la population
-            else
+            /*else
             {
                 System.Random rnd = new System.Random();
 
@@ -79,7 +79,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                     Table();
                 }
-            }
+            }*/
         }
 
         public void VariationEnvieBoire(double variationEnvieBoire)
@@ -195,6 +195,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 personnaliteDominante = "dragueur";
 
             }
+
+            else { personnaliteDominante = "neutre"; }
         }
 
         public void Boire()
