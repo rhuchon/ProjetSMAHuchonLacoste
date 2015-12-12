@@ -12,8 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public NavMeshAgent agent { get; private set; }
         public ThirdPersonCharacter character { get; private set; }
-        public MeshRenderer body { get; private set; }
-        //public GameObject body;
+        public SkinnedMeshRenderer body { get; private set; }
         private double remainingDist;
         //public string testcouleur;
         //public string testactionperso;
@@ -32,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             agent = GetComponent<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();                                  
-            body = GetComponent<MeshRenderer>();
+            body = GetComponentInChildren<SkinnedMeshRenderer>();
 
             GameObject bar = GameObject.Find("Bar");
             emplacementbar = bar.transform;
@@ -56,26 +55,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void Update()
         {
             
-            //GameObject body = GameObject.Find("LesGens");
-
             switch (personnalite.personnaliteDominante)
             {
                     
                 case "buveur":
-                    //body.GetComponent<MeshRenderer>().material.color = Color.blue;
                     body.material.color = Color.blue;                    
                     break;
                 case "danseur":
-                    //body.GetComponent<MeshRenderer>().material.color = Color.red;
-                    body.material.color = Color.blue;
+                    body.material.color = Color.green;
                     break;
                 case "dragueur":
-                    body.material.color = Color.blue;
-                    //body.GetComponent<MeshRenderer>().material.color = Color.green;
+                    body.material.color = Color.red;
                     break;
                 case "neutre":
-                    //body.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                    body.material.color = Color.blue;
+                    body.material.color = Color.yellow;
                     break;
 
             }

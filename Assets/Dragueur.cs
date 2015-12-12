@@ -5,7 +5,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 {
     public class Dragueur : Personnalite
     {
-        public Dragueur()
+        public Dragueur(Game game) : base (game)
         {
             etatCourant = "draguer";
             probaBoire = 0.05;
@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             variationEnvieTable = 0.02;
             variationEnvieToilette = 0.02;
             VariationPersonnaliteDominante();
+           
         }
 
     }

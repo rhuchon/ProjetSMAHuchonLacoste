@@ -2932,9 +2932,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7421b15f122cd874bae8160040e8bc68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nbPersonnes: 24
-  etatsPopulation: []
-  dureeEtat: 5
+  nbBuveur: 25
+  nbDanseur: 20
+  nbDragueur: 14
+  dureeEtat: 15
   dureeSimulation: 100
 --- !u!4 &414095365
 Transform:
@@ -7070,30 +7071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f838e809269d74a88f71dff7a9ff36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1082319166
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1082319158}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!1 &1083200576
 GameObject:
   m_ObjectHideFlags: 0
@@ -9532,7 +9509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.90100002
+      value: -4.96000004
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -9661,7 +9638,11 @@ Prefab:
     - target: {fileID: 13772780, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b271d5236bcaae9459ea0061b59dab2a, type: 2}
+      objectReference: {fileID: 2100000, guid: 621e901dcf5ebaf46bce29d18f67194c, type: 2}
+    - target: {fileID: 13772780, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11402594, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 54eb5844754051b40a918a84c33b7c1a, type: 2}
@@ -12384,7 +12365,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1222297098}
   - 95: {fileID: 1954158216}
-  - 114: {fileID: 1954158217}
   m_Layer: 0
   m_Name: Club
   m_TagString: Untagged
@@ -12410,21 +12390,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1954158217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1954158215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7421b15f122cd874bae8160040e8bc68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nbPersonnes: 4
-  etatsPopulation: []
-  dureeEtat: 10
-  dureeSimulation: 1000
 --- !u!1 &1973947285
 GameObject:
   m_ObjectHideFlags: 0

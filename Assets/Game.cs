@@ -6,10 +6,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     public class Game : MonoBehaviour
     {
 
-        public int nbPersonnes;
+        internal int nbPersonnes; // s'en déduit du nb de perso dans chaque état
 
-        public Personnalite[] personnes;
-        public string[] etatsPopulation; //On stoque le nombre de personne dans le même état, une case par état
+        private Personnalite[] personnes; 
+        private int[] etatsPopulation; //On stoque le nombre de personne dans le même état, une case par état
+        public int nbBuveur;
+        public int nbDanseur;
+        public int nbDragueur;
         public System.DateTime dateSysteme;
         public System.DateTime ancienneDateMAJ;
         public System.DateTime datedebut;
@@ -19,35 +22,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         // Use this for initialization
         public void Start()
         {
-            dureeEtat = 5;
-            dureeSimulation = 25;
-            int nbBuveur = 4;
-            int nbDanseur = 4;
-            int nbDragueur = 4;
+            //dureeEtat = 5;
+            //dureeSimulation = 25;
+
             nbPersonnes = nbBuveur + nbDanseur + nbDragueur;
             personnes = new Personnalite[nbPersonnes];
             ancienneDateMAJ = System.DateTime.Now;
             datedebut = System.DateTime.Now;
 
             //TODO instancier les personnes
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < nbBuveur; i++)
             {
-                personnes[i] = new Buveur();
+                personnes[i] = new Buveur(this);
+                
             }
 
-            for (int i = 4; i < 8; i++)
+            for (int i = nbBuveur; i < nbDanseur+nbBuveur; i++)
             {
-                personnes[i] = new Danseur();
+                personnes[i] = new Danseur(this);
             }
-            for (int i = 8; i < 12; i++)
+            for (int i = nbBuveur+nbDanseur; i < nbPersonnes; i++)
             {
-                personnes[i] = new Dragueur();
+                personnes[i] = new Dragueur(this);
             }
 
 
             GameObject p = GameObject.Find("AIThirdPersonController");
-            p.GetComponentInChildren<Comportement3D>().personnalite = personnes[0];
-
+            
             for (int i = 0; i < nbPersonnes; i++)
             {
                 GameObject a = Instantiate(p);
@@ -55,6 +56,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 a.GetComponentInChildren<Comportement3D>().personnalite = personnes[i];
             }
 
+            Destroy(p);
         }
 
         // Update is called once per frame

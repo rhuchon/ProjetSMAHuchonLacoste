@@ -20,8 +20,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public double variationEnvieToilette;
         public Comportement3D comportement;
 
-        public Personnalite()
+        public Personnalite(Game game)
         {
+            gameActuel = game;
             //VariationPersonnaliteDominante();
         }
 
@@ -60,26 +61,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                 VariationPersonnaliteDominante();
             }
+
             // Choix de l'action en fonction des etats courants de la population
-            /*else
+            else
             {
                 System.Random rnd = new System.Random();
 
                 int aleaEtatsPopulation = rnd.Next(0, gameActuel.nbPersonnes);
-                if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "buveur")
+                if (0 <=aleaEtatsPopulation && aleaEtatsPopulation <= gameActuel.nbBuveur)
                 {
                     Boire();
                 }
-                else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "danseur")
+                else if (gameActuel.nbBuveur<= aleaEtatsPopulation && aleaEtatsPopulation <= gameActuel.nbBuveur+gameActuel.nbDanseur)
                 {
                     Danser();
                 }
-                else if (gameActuel.etatsPopulation[aleaEtatsPopulation] == "dragueur")
+                else if (gameActuel.nbBuveur + gameActuel.nbDanseur <= aleaEtatsPopulation && aleaEtatsPopulation <= gameActuel.nbPersonnes)
                 {
 
                     Table();
                 }
-            }*/
+            }
         }
 
         public void VariationEnvieBoire(double variationEnvieBoire)

@@ -7,7 +7,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     {
 
         // Use this for initialization
-        public Danseur()
+        public Danseur(Game game) : base(game)
         {
             etatCourant = "danser";
             probaBoire = 0.1;

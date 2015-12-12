@@ -5,7 +5,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 {
     public class Buveur : Personnalite
     {
-        public Buveur()
+        public Buveur(Game game) : base (game)
         {
             etatCourant = "boire";
             probaBoire = 0.65;
