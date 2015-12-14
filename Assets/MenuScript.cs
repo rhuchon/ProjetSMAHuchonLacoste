@@ -32,7 +32,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldDragueurBuveur")
+                if (texts[i].name == "InputFieldDragueur")
                 {
                     game.nbDragueur = int.Parse(texts[i].text);
                 }
@@ -53,9 +53,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     game.dureeSimulation = int.Parse(texts[i].text);
                 }
             } 
-            
-            
-                                     
+                
             Application.LoadLevel("GamePlay");
             
 

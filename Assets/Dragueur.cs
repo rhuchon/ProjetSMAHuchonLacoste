@@ -7,7 +7,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     {
         public Dragueur(Game game) : base (game)
         {
-            etatCourant = "draguer";
+            etatCourant = "parler";
             probaBoire = 0.05;
             probaDanser = 0.2;
             probaParler = 0.4;

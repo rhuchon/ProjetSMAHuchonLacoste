@@ -22,7 +22,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         Transform emplacementmirror;
         Transform emplacementpiste;
         Transform emplacementtable;
-
+        GameObject[] tables;
 
         // Use this for initialization
         void Start()
@@ -42,8 +42,29 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             GameObject dancefloor = GameObject.Find("Dancefloor");
             emplacementpiste = dancefloor.transform;
 
-            GameObject table = GameObject.Find("Sofa3");
-            emplacementtable = table.transform;
+            
+            tables = new GameObject[8];
+            
+            GameObject table1 = GameObject.Find("Sofa1");
+            GameObject table2 = GameObject.Find("Sofa2");
+            GameObject table3 = GameObject.Find("Sofa3");
+            GameObject table4 = GameObject.Find("Sofa4");
+            GameObject table5 = GameObject.Find("Sofa5");
+            GameObject table6 = GameObject.Find("Sofa6");
+            GameObject table7 = GameObject.Find("Sofa7");
+            GameObject table8 = GameObject.Find("Sofa8");
+
+            tables[0] = table1;
+            tables[1] = table2;
+            tables[2] = table3;
+            tables[3] = table4;
+            tables[4] = table5;
+            tables[5] = table6;
+            tables[6] = table7;
+            tables[7] = table8;
+
+
+            //emplacementtable = table.transform;
 
             
 
@@ -83,6 +104,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     Move(emplacementpiste);
                     break;
                 case "parler":
+                    System.Random rd = new System.Random();
+                    int choix = rd.Next(tables.Length);
+                    emplacementtable = tables[choix].transform;
                     Move(emplacementtable);
                     break;
                 case "goTable":
@@ -97,13 +121,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Move(Transform target)
         {
+            
             remainingDist = agent.remainingDistance;
             if ((remainingDist >= 0.2) && (remainingDist <= 0.3))
             {
                 //if distance de la target < seuil stop
                 agent.stoppingDistance = (float)remainingDist;
                 character.Move(Vector3.zero, false, false);
-                agent.Stop();
+                //agent.Stop();
             }
             else if (target != null)
             {
