@@ -2914,6 +2914,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414095365}
   - 114: {fileID: 414095364}
+  - 114: {fileID: 414095366}
   m_Layer: 0
   m_Name: Simulation
   m_TagString: Untagged
@@ -2949,6 +2950,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &414095366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 414095363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b89658d651514c90a74ae68bef3d18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &437855960
 GameObject:
   m_ObjectHideFlags: 0

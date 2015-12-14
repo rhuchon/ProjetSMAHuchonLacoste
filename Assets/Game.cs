@@ -18,13 +18,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public System.DateTime datedebut;
         public int dureeEtat; // Temps en seconde d'un etat
         public int dureeSimulation; // Temps de la simulation en seconde
+        public static int nbBuveurFin;
+        public static int nbDanseurFin;
+        public static int nbDragueurFin;
+        public static int nbNeutreFin;
+
 
         // Use this for initialization
         public void Start()
         {
+            nbBuveur = MenuScript.nbBuveur;
+            nbDanseur = MenuScript.nbDanseur;
+            nbDragueur = MenuScript.nbDragueur;
+            dureeEtat = MenuScript.dureeEtat;
+            dureeSimulation = MenuScript.dureeSimu;
+            nbBuveurFin = 0;
+            nbDanseurFin = 0;
+            nbDragueurFin = 0;
+            nbNeutreFin = 0;
+            //DontDestroyOnLoad();
             //dureeEtat = 5;
             //dureeSimulation = 25;
-
             nbPersonnes = nbBuveur + nbDanseur + nbDragueur;
             personnes = new Personnalite[nbPersonnes];
             ancienneDateMAJ = System.DateTime.Now;
@@ -81,7 +95,29 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             else if (fin == dureeSimulation)
             {
-                Debug.Log("Biimmmm");
+
+                for (int i = 0; i < personnes.Length; i++)
+                {
+                    if (personnes[i].personnaliteDominante == "Buveur")
+                    {
+                        nbBuveurFin++;
+                    }
+                    else if (personnes[i].personnaliteDominante == "Danseur")
+                    {
+                        nbDanseurFin++;
+                    }
+                    else if (personnes[i].personnaliteDominante == "Dragueur")
+                    {
+                        nbDragueurFin++;
+                    }
+                    else if (personnes[i].personnaliteDominante == "Neutre")
+                    {
+                        nbNeutreFin++;
+                    }
+                }
+
+                Application.LoadLevel("MenuFin");
+
             }
         }
     }

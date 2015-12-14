@@ -6,57 +6,62 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 {
     public class MenuScript : MonoBehaviour
     {
-        Game game;
-        InputField textBuveur;
+        public static int nbBuveur;
+        public static int nbDanseur;
+        public static int nbDragueur;
+        public static int dureeEtat;
+        public static int dureeSimu;
 
         public void NewGame()
         {
-            InputField[] texts;
-            texts = GetComponentsInChildren<InputField>();
+            Text[] texts;
+            texts = GetComponentsInChildren<Text>();
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldBuveur")
+                if (texts[i].name == "NbBuveur")
                 {
-                    game.nbBuveur = int.Parse(texts[i].text);
+                    nbBuveur = int.Parse(texts[i].text);
                 }
             }
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldDanseur")
+                if (texts[i].name == "NbDanseur")
                 {
-                    game.nbDanseur = int.Parse(texts[i].text);
+                    nbDanseur = int.Parse(texts[i].text);
                 }
             } 
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldDragueur")
+                if (texts[i].name == "NbDragueur")
                 {
-                    game.nbDragueur = int.Parse(texts[i].text);
+                    nbDragueur = int.Parse(texts[i].text);
                 }
             } 
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldDureeEtat")
+                if (texts[i].name == "DureeEtat")
                 {
-                    game.dureeEtat = int.Parse(texts[i].text);
+                    dureeEtat = int.Parse(texts[i].text);
                 }
             } 
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "InputFieldDureeSimulation")
+                if (texts[i].name == "DureeSimu")
                 {
-                    game.dureeSimulation = int.Parse(texts[i].text);
+                    dureeSimu = int.Parse(texts[i].text);
                 }
-            } 
-                
+
+
+            }
+
+            //DontDestroyOnLoad(this);
             Application.LoadLevel("GamePlay");
             
-
         }
     }
 }
