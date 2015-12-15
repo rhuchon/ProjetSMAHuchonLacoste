@@ -22,6 +22,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public static int nbDanseurFin;
         public static int nbDragueurFin;
         public static int nbNeutreFin;
+		public bool menuCharge = true;
 
 
         // Use this for initialization
@@ -93,31 +94,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             }
 
-            else if (fin == dureeSimulation)
+            else if ((fin == dureeSimulation)&&(menuCharge))
             {
-
                 for (int i = 0; i < personnes.Length; i++)
                 {
-                    if (personnes[i].personnaliteDominante == "Buveur")
+                    if (personnes[i].personnaliteDominante == "buveur")
                     {
                         nbBuveurFin++;
                     }
-                    else if (personnes[i].personnaliteDominante == "Danseur")
+                    else if (personnes[i].personnaliteDominante == "danseur")
                     {
                         nbDanseurFin++;
                     }
-                    else if (personnes[i].personnaliteDominante == "Dragueur")
+                    else if (personnes[i].personnaliteDominante == "dragueur")
                     {
                         nbDragueurFin++;
                     }
-                    else if (personnes[i].personnaliteDominante == "Neutre")
+                    else if (personnes[i].personnaliteDominante == "neutre")
                     {
                         nbNeutreFin++;
                     }
+					Debug.Log(nbBuveurFin);
                 }
-
                 Application.LoadLevel("MenuFin");
-
+				menuCharge = false;
             }
         }
     }

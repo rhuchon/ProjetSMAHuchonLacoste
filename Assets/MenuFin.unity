@@ -620,7 +620,7 @@ GameObject:
   - 222: {fileID: 616875655}
   - 114: {fileID: 616875654}
   m_Layer: 5
-  m_Name: NbDanseur
+  m_Name: NbDanseurFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,8 +812,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nbBuveurFin: 0
   nbDanseurFin: 0
-  nbDragueurFin: 0
-  nbNeutreFin: 0
+  nbDragueurFin: 12
+  nbNeutreFin: 13
   nbBuveur: 0
   nbDanseur: 0
   nbDragueur: 0
@@ -882,7 +882,7 @@ GameObject:
   - 222: {fileID: 758009349}
   - 114: {fileID: 758009348}
   m_Layer: 5
-  m_Name: NbDragueur
+  m_Name: NbDragueurFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1526,7 +1526,7 @@ GameObject:
   - 222: {fileID: 1363846062}
   - 114: {fileID: 1363846061}
   m_Layer: 5
-  m_Name: NbNeutre
+  m_Name: NbNeutreFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1580,9 +1580,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1
-
-'
+  m_Text: 1
 --- !u!222 &1363846062
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2039,7 +2037,7 @@ GameObject:
   - 222: {fileID: 2128073867}
   - 114: {fileID: 2128073866}
   m_Layer: 5
-  m_Name: NbBuveur
+  m_Name: NbBuveurFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

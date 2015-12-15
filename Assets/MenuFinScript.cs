@@ -13,6 +13,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public int nbBuveur;
         public int nbDanseur;
         public int nbDragueur;
+		public int dureeSimu;
+		public int dureeEtat;
         // Use this for initialization
         void Start()
         {
@@ -20,42 +22,49 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             nbDanseurFin=  Game.nbDanseurFin;
             nbDragueurFin = Game.nbDragueurFin;
             nbNeutreFin = Game.nbNeutreFin;
+			dureeSimu = MenuScript.dureeSimu;
+			dureeEtat = MenuScript.dureeEtat;
             nbBuveur = MenuScript.nbBuveur;
             nbDanseur = MenuScript.nbDanseur;
             nbDragueur = MenuScript.nbDragueur;
-
-            Text[] texts = GetComponents<Text>();
+			Text[] texts = GetComponentsInChildren<Text>();
 
             for (int i = 0; i < texts.Length; i++)
             {
-                if (texts[i].name == "TextBuveur")
+                if (texts[i].name == "NbBuveur")
                 {
                     texts[i].text = nbBuveur.ToString();
                 }
-                if (texts[i].name == "TextDanseur")
+                if (texts[i].name == "NbDanseur")
                 {
                     texts[i].text = nbDanseur.ToString();
                 }
-                if (texts[i].name == "TextDragueur")
+                if (texts[i].name == "NbDragueur")
                 {
                     texts[i].text = nbDragueur.ToString();
                 }
-                if (texts[i].name == "TextBuveurFin")
+                if (texts[i].name == "NbBuveurFin")
                 {
                     texts[i].text = nbBuveurFin.ToString();
                 }
-                if (texts[i].name == "TextDanseurFin")
+                if (texts[i].name == "NbDanseurFin")
                 {
                     texts[i].text = nbDanseurFin.ToString();
                 }
-                if (texts[i].name == "TextDragueurFin")
+                if (texts[i].name == "NbDragueurFin")
                 {
                     texts[i].text = nbDragueurFin.ToString();
                 }
-                if (texts[i].name == "TextNeutreFin")
+                if (texts[i].name == "NbNeutreFin")
                 {
                     texts[i].text = nbNeutreFin.ToString();
                 }
+				if (texts[i].name == "DureeEtat") {
+					texts[i].text = dureeEtat.ToString();
+				}
+				if (texts[i].name == "DureeSimu") {
+					texts[i].text = dureeSimu.ToString();
+				}
             }
         }
     }
