@@ -312,7 +312,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 89.1160889, y: 143.598602}
+  m_AnchoredPosition: {x: 89.1160889, y: 140}
   m_SizeDelta: {x: 182, y: 35}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &511786482
@@ -492,7 +492,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 250.5, y: 137.5}
+  m_AnchoredPosition: {x: 250.5, y: 140}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &523717629
@@ -817,6 +817,8 @@ MonoBehaviour:
   nbBuveur: 0
   nbDanseur: 0
   nbDragueur: 0
+  dureeSimu: 0
+  dureeEtat: 0
 --- !u!114 &736746275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,7 +1007,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1149,7 +1151,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1503,7 +1505,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1691,7 +1693,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -129, y: 138}
+  m_AnchoredPosition: {x: -129, y: 140}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1555400866
@@ -1913,7 +1915,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -261.806091, y: 145.973969}
+  m_AnchoredPosition: {x: -261.806091, y: 140}
   m_SizeDelta: {x: 182, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1925717418
@@ -2014,7 +2016,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
